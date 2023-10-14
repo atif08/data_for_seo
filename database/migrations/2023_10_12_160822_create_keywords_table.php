@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('keywords', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('search_keyword_id');
+            $table->integer('repetition');
+            $table->string('type')->nullable();
+            $table->integer('rank_group')->nullable();
+            $table->integer('rank_absolute')->nullable();
+            $table->string('position')->nullable();
+            $table->string('domain')->nullable();
+            $table->string('url')->nullable();
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

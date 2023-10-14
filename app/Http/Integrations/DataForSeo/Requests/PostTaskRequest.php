@@ -2,6 +2,7 @@
 
 namespace App\Http\Integrations\DataForSeo\Requests;
 
+use App\Models\SearchKeyword;
 use Saloon\Http\Request;
 use Saloon\Enums\Method;
 use Illuminate\Support\Str;
@@ -21,7 +22,9 @@ class PostTaskRequest extends Request implements HasBody
     protected Method $method = Method::POST;
 
 
-    public function __construct()
+    public function __construct(public readonly \Illuminate\Http\Request $request,
+                                public readonly SearchKeyword $searchKeyword,
+                                public readonly int $i)
     {
 
     }
@@ -41,10 +44,14 @@ class PostTaskRequest extends Request implements HasBody
     {
         return [[
             'language_code' => 'en',
-            'location_code' => '2840',
-            'keyword' => 'tests',
-            'postback_url' => 'https://your-server.com/postbackscript.php',
-            'postback_data' => 'advance',
+            'location_code' => $this->request->location_code,
+            'keyword' => $this->request->keyword,
+            'device' => $this->request->desktop,
+            'search_keyword_id' => $this->searchKeyword->id,
+            'repetition' => $this->i,
+            'postback_url' => 'https://seo2.thewpmonster.com/api/post-back',
+            'postback_data' => 'advanced',
+            'tag'=>$this->searchKeyword->id.','.$this->i
 
         ]];
     }

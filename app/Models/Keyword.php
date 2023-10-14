@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Keyword extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+//    protected $fillable = ['type','rank_group','rank_absolute','position','domain','title','description'];
 }

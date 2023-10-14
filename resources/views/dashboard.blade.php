@@ -11,7 +11,33 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
                 </div>
+{{--                @dd($searches)--}}
             </div>
+            <table id="example" class="table table-striped table-bordered bg-white overflow-hidden shadow-sm sm:rounded-lg" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Keyword</th>
+                    <th>Device</th>
+                    <th>Location</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($searches as $search)
+                <tr>
+                    <td><a href="{{route('searches.detail',$search->id)}}"> {{$search->keyword}}</a></td>
+                    <td>{{$search->device}}</td>
+                    <td>{{$search->location_code}}</td>
+                </tr>
+                @endforeach
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Keyword</th>
+                    <th>Device</th>
+                    <th>Location</th>
+                </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 </x-app-layout>
